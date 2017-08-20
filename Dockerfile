@@ -1,8 +1,7 @@
 FROM alpine:edge
 
 EXPOSE 8118 
-
-apk --update add privoxy
+apk add privoxy
 
 COPY service /etc/service/
 
