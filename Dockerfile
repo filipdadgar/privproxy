@@ -1,8 +1,10 @@
-FROM alpine:edge
+FROM alpine:latest
 
-EXPOSE 8118 
-apk add privoxy
+RUN apk --no-cache add privoxy 
+ADD privoxy-start.sh /usr/local/bin/
+ADD config /etc/privoxy/
+RUN chmod +r /etc/privoxy/config && chmod +x /usr/local/bin/privoxy-start.sh
 
-COPY service /etc/service/
+CMD ["privoxy-start.sh"]
 
-CMD ["runsvdir", "/etc/service"]
+EXPOSE 8118
